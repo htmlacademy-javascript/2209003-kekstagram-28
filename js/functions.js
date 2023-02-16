@@ -1,16 +1,29 @@
 // 1
-const hasMinChars = (str, maxCount) => str.length <= maxCount;
+const isCorrectByMaxLength = (text, maxLength) => {
+  let length = 0;
 
-hasMinChars('проверяемая строка', 20);
-hasMinChars('проверяемая строка', 18);
-hasMinChars('проверяемая строка', 10);
+  for (const char of text) {
+    // checking start of surrogate couple
+    if (char.charCodeAt(0) !== char.codePointAt(0)) {
+      continue;
+    }
+
+    ++length;
+  }
+
+  return length <= maxLength;
+};
+
+isCorrectByMaxLength('проверяемая строка', 20);
+isCorrectByMaxLength('проверяемая стро𝒳𝒳', 18);
+isCorrectByMaxLength('проверяемая строка', 10);
 
 // 2
-const isPalindrom = (str) => {
-  const modifiedString = str.toLowerCase().replaceAll(' ', '');
-  const reversedString = modifiedString.split('').reverse().join('');
+const isPalindrom = (text) => {
+  const clearedText = text.toLowerCase().replaceAll(' ', '');
+  const reversedText = clearedText.split('').reverse().join('');
 
-  return reversedString === modifiedString;
+  return reversedText === clearedText;
 };
 
 isPalindrom('топот');
@@ -19,8 +32,8 @@ isPalindrom('Кекс');
 isPalindrom('Лёша на полке клопа нашёл ');
 
 // 3
-const findAllNumbers = (str) => {
-  const allNumbers = String(str).match(/\d/g)?.join('') || NaN;
+const findAllNumbers = (text) => {
+  const allNumbers = String(text).match(/\d/g)?.join('') ?? NaN;
 
   return Number(allNumbers);
 };
@@ -34,8 +47,8 @@ findAllNumbers(-1);
 findAllNumbers(1.5);
 
 // 4
-const myPadStart = (str, count, extraChars) => {
-  let result = str;
+const addCharsAtStart = (string, count, extraChars) => {
+  let result = string;
 
   while (result.length < count) {
     const lastIndex = count - result.length;
@@ -45,8 +58,8 @@ const myPadStart = (str, count, extraChars) => {
   return result;
 };
 
-myPadStart('1', 2, '0');
-myPadStart('1', 4, '0');
-myPadStart('q', 4, 'werty');
-myPadStart('q', 4, 'we');
-myPadStart('qwerty', 4, '0');
+addCharsAtStart('1', 2, '0');
+addCharsAtStart('1', 4, '0');
+addCharsAtStart('q', 4, 'werty');
+addCharsAtStart('q', 4, 'we');
+addCharsAtStart('qwerty', 4, '0');
