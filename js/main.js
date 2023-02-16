@@ -36,19 +36,19 @@ const getRandomIntegerNumber = (min, max) => (
   Math.floor(Math.random() * (max - min + 1)) + min
 );
 
-const getRandomIndexElement = (list) => (
-  getRandomIntegerNumber(0, list.length - 1)
+const getRandomIndexElement = (items) => (
+  getRandomIntegerNumber(0, items.length - 1)
 );
 
-const getRandomElement = (list) => (
-  list[getRandomIndexElement(list)]
+const getRandomElement = (items) => (
+  items[getRandomIndexElement(items)]
 );
 
-const getRandomElements = (list, count = 1) => {
+const getRandomElements = (items, count = 1) => {
   const indexes = [];
 
-  while ((indexes.length < count) && (list.length !== indexes.length)) {
-    const randomIndex = getRandomIndexElement(list);
+  while ((indexes.length < count) && (items.length !== indexes.length)) {
+    const randomIndex = getRandomIndexElement(items);
 
     if (indexes.includes(randomIndex)) {
       continue;
@@ -57,7 +57,7 @@ const getRandomElements = (list, count = 1) => {
     indexes.push(randomIndex);
   }
 
-  return indexes.map((index) => list[index]);
+  return indexes.map((index) => items[index]);
 };
 
 const createElements = (count, creater) => (
