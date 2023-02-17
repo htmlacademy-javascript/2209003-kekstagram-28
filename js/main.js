@@ -60,7 +60,7 @@ const getRandomElements = (items, count = 1) => {
   return indexes.map((index) => items[index]);
 };
 
-const createElements = (count, creater) => (
+const createElements = (creater, count) => (
   Array.from({ length: count }, creater)
 );
 
@@ -83,7 +83,7 @@ const createComment = () => {
   };
 };
 
-const comments = createElements(COUNT_OF_COMMENTS, createComment);
+const comments = createElements(createComment, COUNT_OF_COMMENTS);
 
 // photos
 const COUNT_OF_PHOTOS = 25;
@@ -107,4 +107,4 @@ const createPhoto = () => {
 };
 
 // eslint-disable-next-line no-unused-vars
-const photos = createElements(COUNT_OF_PHOTOS, createPhoto);
+const photos = createElements(createPhoto, COUNT_OF_PHOTOS);
