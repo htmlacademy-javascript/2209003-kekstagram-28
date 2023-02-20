@@ -1,2 +1,2 @@
 import './render-photos.js';
-import './add-listener-of-photos.js';
+import './add-listener-photos.js';

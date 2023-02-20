@@ -13,9 +13,9 @@ photos.forEach(({ id, url, likes, comments }) => {
   picture.querySelector('.picture__img').src = url;
   picture.querySelector('.picture__likes').textContent = likes;
   picture.querySelector('.picture__comments').textContent = comments.length;
-  picture.querySelector('.id').textContent = id;
+  picture.dataset.id = id;
 
-  pictures.append(picture);
+  pictures.appendChild(picture);
 });
 
 picturesContainer.appendChild(pictures);
