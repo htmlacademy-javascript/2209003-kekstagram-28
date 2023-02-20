@@ -30,3 +30,5 @@ const createPhoto = () => {
 };
 
 export const photos = createElements(createPhoto, COUNT_OF_PHOTOS);
+
+export const findPhoto = (id) => photos.find((photo) => photo.id === id);
