@@ -22,4 +22,4 @@ photos.forEach(({ url, likes, comments }) => {
   pictures.append(picture);
 });
 
-picturesContainer.append(pictures);
+picturesContainer.appendChild(pictures);
