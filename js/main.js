@@ -1,2 +1,6 @@
-import './render-photos.js';
-import './add-listener-photos.js';
+import { renderGalleryPhotos } from './logic/gallery/index.js';
+import { openBigPicture } from './logic/big-picture/index.js';
+
+renderGalleryPhotos((photoData) => {
+  openBigPicture(photoData);
+});
