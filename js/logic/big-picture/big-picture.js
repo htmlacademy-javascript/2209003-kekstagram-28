@@ -1,5 +1,8 @@
 import { fillUserComments, removeLoadingButtonClickHandler } from './big-picture-comment.js';
-import { addBigPictureHandlers } from './big-picture-listeners.js';
+import {
+  addBigPictureHandlers,
+  removeBigPictureHandlers,
+} from './big-picture-listeners.js';
 
 const bigPicture = document.querySelector('.big-picture');
 const image = bigPicture.querySelector('.big-picture__img img');
@@ -7,16 +10,21 @@ const descriptionContainer = bigPicture.querySelector('.social__caption');
 const likesContainer = bigPicture.querySelector('.likes-count');
 
 const fillBigPicture = ({ url, description, likes, comments }) => {
+  const START_COMMENTS_COUNT = 5;
+  const NEW_COMMENTS_COUNT = 5;
+
   image.src = url;
   descriptionContainer.textContent = description;
   likesContainer.textContent = likes;
 
-  fillUserComments(comments, 5, 5);
+  fillUserComments(comments, START_COMMENTS_COUNT, NEW_COMMENTS_COUNT);
 };
 
 export const closeBigPicture = () => {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
+
+  removeBigPictureHandlers();
   removeLoadingButtonClickHandler();
 };
 

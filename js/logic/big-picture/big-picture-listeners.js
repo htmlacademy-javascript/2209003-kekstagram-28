@@ -8,8 +8,6 @@ const closingButtonClickHandler = (event) => {
   event.preventDefault();
 
   closeBigPicture();
-
-  closingButton.removeEventListener('click', closingButtonClickHandler);
 };
 
 const documentKeydownHandler = (event) => {
@@ -17,12 +15,15 @@ const documentKeydownHandler = (event) => {
     event.preventDefault();
 
     closeBigPicture();
-
-    document.removeEventListener('keydown', documentKeydownHandler);
   }
 };
 
 export const addBigPictureHandlers = () => {
   closingButton.addEventListener('click', closingButtonClickHandler);
   document.addEventListener('keydown', documentKeydownHandler);
+};
+
+export const removeBigPictureHandlers = () => {
+  closingButton.removeEventListener('click', closingButtonClickHandler);
+  document.removeEventListener('keydown', documentKeydownHandler);
 };

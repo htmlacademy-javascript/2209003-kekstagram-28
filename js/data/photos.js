@@ -22,7 +22,7 @@ const createPhoto = () => {
     url: createPhotoUrl(photoId),
     description: getRandomElement(DESCRIPTIONS),
     likes: getRandomIntegerNumber(15, 200),
-    comments: getRandomElements(comments, 20),
+    comments: getRandomElements(comments, 7),
   };
 };
 

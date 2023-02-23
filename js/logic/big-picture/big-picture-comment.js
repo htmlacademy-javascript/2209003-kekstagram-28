@@ -25,21 +25,27 @@ const createUserComment = ({
   return userComment;
 };
 
-const addNewComments = (comments, startIndex, commentsCount) => {
-  commentsContainer.append(
-    ...comments
-      .slice(startIndex, startIndex + commentsCount)
-      .map(createUserComment)
-  );
-};
-
 let loadingButtonClickHandler = null;
-
 export const removeLoadingButtonClickHandler = () => {
   loadingButton.removeEventListener('click', loadingButtonClickHandler);
 };
 
-const addLoadingButtonClickHandler = (comments, startIndex, commentsCount) => {
+const addNewComments = (comments, startIndex, commentsCount) => {
+  const lastIndex = startIndex + commentsCount;
+
+  commentsContainer.append(
+    ...comments
+      .slice(startIndex, lastIndex)
+      .map(createUserComment)
+  );
+
+  if (lastIndex >= comments.length) {
+    loadingButton.classList.add('hidden');
+    removeLoadingButtonClickHandler();
+  }
+};
+
+const addLoadingButtonClickHandler = (comments, startIndex = 0, commentsCount) => {
   if (loadingButtonClickHandler) {
     removeLoadingButtonClickHandler();
   }
@@ -59,12 +65,17 @@ const addLoadingButtonClickHandler = (comments, startIndex, commentsCount) => {
 export const fillUserComments = (
   comments,
   startCount = 5,
-  newCommentsCount = Infinity
+  newCommentsCount = Infinity,
 ) => {
-  commentsCurrentCountContainer.textContent = startCount;
-  commentsAllCountContainer.textContent = comments.length;
-  commentsContainer.replaceChildren();
+  const commentsCount = comments.length;
 
-  addNewComments(comments, 0, startCount);
+  commentsCurrentCountContainer.textContent = startCount > commentsCount
+    ? commentsCount
+    : startCount;
+  commentsAllCountContainer.textContent = commentsCount;
+  commentsContainer.replaceChildren();
+  loadingButton.classList.remove('hidden');
+
+  addNewComments(comments, null, startCount);
   addLoadingButtonClickHandler(comments, startCount, newCommentsCount);
 };
