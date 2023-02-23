@@ -4,12 +4,10 @@ const closingButton = document
   .querySelector('.big-picture')
   .querySelector('.big-picture__cancel');
 
-const closingButtonClickHanlder = (event) => {
+const closingButtonClickHandler = (event) => {
   event.preventDefault();
 
   closeBigPicture();
-
-  closingButton.removeEventListener('click', closingButtonClickHanlder);
 };
 
 const documentKeydownHandler = (event) => {
@@ -17,12 +15,15 @@ const documentKeydownHandler = (event) => {
     event.preventDefault();
 
     closeBigPicture();
-
-    document.removeEventListener('keydown', documentKeydownHandler);
   }
 };
 
 export const addBigPictureHandlers = () => {
-  closingButton.addEventListener('click', closingButtonClickHanlder);
+  closingButton.addEventListener('click', closingButtonClickHandler);
   document.addEventListener('keydown', documentKeydownHandler);
+};
+
+export const removeBigPictureHandlers = () => {
+  closingButton.removeEventListener('click', closingButtonClickHandler);
+  document.removeEventListener('keydown', documentKeydownHandler);
 };

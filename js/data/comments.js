@@ -1,11 +1,11 @@
 import { getRandomIntegerNumber, getRandomElement } from '../helpers/random.js';
 import { getIdGenerator } from '../helpers/id.js';
-import { createElements } from '../helpers/creater.js';
+import { createElements } from '../helpers/creator.js';
 
 import { MESSAGES } from './../mock/messages.js';
 import { NAMES } from './../mock/names.js';
 
-const COUNT_OF_COMMENTS = 25;
+const COUNT_OF_COMMENTS = 50;
 
 const createAvatarUrl = (min, max) => (
   `img/avatar-${getRandomIntegerNumber(min, max)}.svg`

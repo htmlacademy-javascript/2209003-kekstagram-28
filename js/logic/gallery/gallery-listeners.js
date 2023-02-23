@@ -1,18 +1,14 @@
 import { findPhoto } from '../../data/photos.js';
 
-export const picturesContainerClickHandler = (event, clickPicturesCallback) => {
-  const pictureElement = event.target.closest('.picture');
+export const addPicturesContainerClickHandler = (event, clickPicturesCallback) => {
+  const picture = event.target.closest('.picture');
 
-  if (!pictureElement) {
+  if (!picture) {
     return;
   }
 
   event.preventDefault();
 
-  if (!clickPicturesCallback) {
-    return;
-  }
-
-  const id = Number(pictureElement.dataset.id);
+  const id = Number(picture.dataset.id);
   clickPicturesCallback(findPhoto(id));
 };

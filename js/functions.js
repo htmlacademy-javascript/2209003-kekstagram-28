@@ -19,17 +19,17 @@ isCorrectByMaxLength('проверяемая стро𝒳𝒳', 18);
 isCorrectByMaxLength('проверяемая строка', 10);
 
 // 2
-const isPalindrom = (text) => {
+const isPalindrome = (text) => {
   const clearedText = text.toLowerCase().replaceAll(' ', '');
   const reversedText = clearedText.split('').reverse().join('');
 
   return reversedText === clearedText;
 };
 
-isPalindrom('топот');
-isPalindrom('ДовОд');
-isPalindrom('Кекс');
-isPalindrom('Лёша на полке клопа нашёл ');
+isPalindrome('топот');
+isPalindrome('ДовОд');
+isPalindrome('Кекс');
+isPalindrome('Лёша на полке клопа нашёл ');
 
 // 3
 const findAllNumbers = (text) => {

@@ -1,1 +1,1 @@
-export { openBigPicture, closeBigPicture } from './big-picture.js';
+export { openBigPicture } from './big-picture.js';

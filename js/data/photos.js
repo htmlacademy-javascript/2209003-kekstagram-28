@@ -4,7 +4,7 @@ import {
   getRandomElements,
 } from '../helpers/random.js';
 import { getIdGenerator } from '../helpers/id.js';
-import { createElements } from '../helpers/creater.js';
+import { createElements } from '../helpers/creator.js';
 
 import { comments } from './comments.js';
 import { DESCRIPTIONS } from './../mock/descriptions.js';
@@ -22,10 +22,7 @@ const createPhoto = () => {
     url: createPhotoUrl(photoId),
     description: getRandomElement(DESCRIPTIONS),
     likes: getRandomIntegerNumber(15, 200),
-    comments: getRandomElements(
-      comments,
-      getRandomIntegerNumber(1, 3),
-    ),
+    comments: getRandomElements(comments, 7),
   };
 };
 

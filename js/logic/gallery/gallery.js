@@ -1,15 +1,28 @@
-import { createPictureElement } from './gallery-picture.js';
-import { picturesContainerClickHandler } from './gallery-listeners.js';
+import { createPicture } from './gallery-picture.js';
+import { addPicturesContainerClickHandler } from './gallery-listeners.js';
 
 import { photos } from '../../data/photos.js';
 
 const picturesContainer = document.querySelector('.pictures');
 
-export const renderGalleryPhotos = (clickPicturesCallback) => {
-  picturesContainer.addEventListener(
-    'click',
-    (event) => picturesContainerClickHandler(event, clickPicturesCallback),
-  );
+let picturesClickHandler = null;
 
-  picturesContainer.append(...photos.map(createPictureElement));
+const removePicturesClickHandler = () => {
+  picturesContainer.removeEventListener('click', picturesClickHandler);
+};
+
+export const renderGalleryPhotos = (clickPicturesCallback) => {
+  if (picturesClickHandler) {
+    removePicturesClickHandler();
+  }
+
+  if (clickPicturesCallback) {
+    picturesClickHandler = (event) => (
+      addPicturesContainerClickHandler(event, clickPicturesCallback)
+    );
+
+    picturesContainer.addEventListener('click', picturesClickHandler);
+  }
+
+  picturesContainer.append(...photos.map(createPicture));
 };
