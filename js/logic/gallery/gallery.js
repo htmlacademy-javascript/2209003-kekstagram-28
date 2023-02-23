@@ -5,19 +5,23 @@ import { photos } from '../../data/photos.js';
 
 const picturesContainer = document.querySelector('.pictures');
 
-let lastPicturesHandler = null;
+let picturesClickHandler = null;
+
+const removePicturesClickHandler = () => {
+  picturesContainer.removeEventListener('click', picturesClickHandler);
+};
 
 export const renderGalleryPhotos = (clickPicturesCallback) => {
-  if (lastPicturesHandler) {
-    picturesContainer.removeEventListener('click', lastPicturesHandler);
+  if (picturesClickHandler) {
+    removePicturesClickHandler();
   }
 
   if (clickPicturesCallback) {
-    lastPicturesHandler = (event) => (
+    picturesClickHandler = (event) => (
       addPicturesContainerClickHandler(event, clickPicturesCallback)
     );
 
-    picturesContainer.addEventListener('click', lastPicturesHandler);
+    picturesContainer.addEventListener('click', picturesClickHandler);
   }
 
   picturesContainer.append(...photos.map(createPicture));
