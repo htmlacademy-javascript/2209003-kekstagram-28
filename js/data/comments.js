@@ -5,7 +5,7 @@ import { createElements } from '../helpers/creater.js';
 import { MESSAGES } from './../mock/messages.js';
 import { NAMES } from './../mock/names.js';
 
-const COUNT_OF_COMMENTS = 25;
+const COUNT_OF_COMMENTS = 50;
 
 const createAvatarUrl = (min, max) => (
   `img/avatar-${getRandomIntegerNumber(min, max)}.svg`
