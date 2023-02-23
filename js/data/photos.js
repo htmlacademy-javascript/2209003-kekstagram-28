@@ -4,7 +4,7 @@ import {
   getRandomElements,
 } from '../helpers/random.js';
 import { getIdGenerator } from '../helpers/id.js';
-import { createElements } from '../helpers/creater.js';
+import { createElements } from '../helpers/creator.js';
 
 import { comments } from './comments.js';
 import { DESCRIPTIONS } from './../mock/descriptions.js';
