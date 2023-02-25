@@ -1,4 +1,4 @@
-export const getFileSrc = (file, callback) => {
+export const handleFileUrl = (file, callback) => {
   const fileReader = new FileReader();
   fileReader.readAsDataURL(file);
   fileReader.onload = () => {

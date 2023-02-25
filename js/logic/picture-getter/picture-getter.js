@@ -1,7 +1,7 @@
 const pictureInput = document.querySelector('.img-upload__input');
 
-export const addPictureGetterChangeHandler = (fileLoadHandler) => {
+export const addPictureGetterChangeHandler = (handleFile) => {
   pictureInput.addEventListener('change', (event) => {
-    fileLoadHandler(event.target.files[0]);
+    handleFile(event.target.files[0]);
   });
 };
