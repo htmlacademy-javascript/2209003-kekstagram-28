@@ -16,14 +16,22 @@ import {
   removeTextInputsHandlers,
 } from './text-inputs/index.js';
 
+// size control
+import {
+  addChangingSizeListeners,
+  removeChangingSizeListeners,
+} from './changing-size/index.js';
+
 export const addDefaultListeners = () => {
   addPictureRedactorModalHandlers();
   addPictureRedactorValidateHandler();
   addTextInputsHandlers();
+  addChangingSizeListeners();
 };
 
 export const removeDefaultListeners = () => {
   removePictureRedactorModalHandlers();
   removePictureRedactorValidateHandler();
   removeTextInputsHandlers();
+  removeChangingSizeListeners();
 };
