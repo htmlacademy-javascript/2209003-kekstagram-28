@@ -303,3 +303,16 @@
    top: auto;
    right: 28px;
  }
+
+/* custom */
+.noUi-handle {
+  cursor: grab;
+}
+
+.noUi-handle:active {
+  cursor: grabbing;
+}
+
+.noUi-base {
+  cursor: pointer;
+}

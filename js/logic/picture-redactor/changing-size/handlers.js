@@ -39,14 +39,14 @@ const increasingButtonClickHandler = () => {
   changingSizeInput.value = transformNumberToPercent(newSizeValue);
 };
 
-export const addChangingSizeListeners = () => {
+export const addChangingSizeHandlers = () => {
   changingSizeInput.value = transformNumberToPercent(START_SIZE);
 
   decreasingButton.addEventListener('click', decreasingButtonClickHandler);
   increasingButton.addEventListener('click', increasingButtonClickHandler);
 };
 
-export const removeChangingSizeListeners = () => {
+export const removeChangingSizeHandlers = () => {
   decreasingButton.removeEventListener('click', decreasingButtonClickHandler);
   increasingButton.removeEventListener('click', increasingButtonClickHandler);
 };

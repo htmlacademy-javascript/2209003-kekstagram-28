@@ -18,20 +18,28 @@ import {
 
 // size control
 import {
-  addChangingSizeListeners,
-  removeChangingSizeListeners,
+  addChangingSizeHandlers,
+  removeChangingSizeHandlers,
 } from './changing-size/index.js';
 
-export const addDefaultListeners = () => {
+// filters
+import {
+  addFiltersHandlers,
+  removeFiltersHandlers,
+} from './filters/index.js';
+
+export const addDefaultHandlers = () => {
   addPictureRedactorModalHandlers();
   addPictureRedactorValidateHandler();
   addTextInputsHandlers();
-  addChangingSizeListeners();
+  addChangingSizeHandlers();
+  addFiltersHandlers();
 };
 
-export const removeDefaultListeners = () => {
+export const removeDefaultHandlers = () => {
   removePictureRedactorModalHandlers();
   removePictureRedactorValidateHandler();
   removeTextInputsHandlers();
-  removeChangingSizeListeners();
+  removeChangingSizeHandlers();
+  removeFiltersHandlers();
 };

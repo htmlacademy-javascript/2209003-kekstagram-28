@@ -1,4 +1,4 @@
-import { addDefaultListeners, removeDefaultListeners } from './listeners.js';
+import { addDefaultHandlers, removeDefaultHandlers } from './handlers.js';
 import { handleFileUrl } from '../../helpers/file.js';
 
 const pictureRedactor = document.querySelector('.img-upload__overlay');
@@ -20,14 +20,14 @@ const fillPictureRedactor = (file, callback) => {
 
 export const openPictureRedactor = (file) => {
   fillPictureRedactor(file, () => {
-    addDefaultListeners();
+    addDefaultHandlers();
     document.body.classList.add('modal-open');
     pictureRedactor.classList.remove('hidden');
   });
 };
 
 export const closePictureRedactor = () => {
-  removeDefaultListeners();
+  removeDefaultHandlers();
   document.body.classList.remove('modal-open');
   pictureRedactor.classList.add('hidden');
   pictureRedactorForm.reset();
