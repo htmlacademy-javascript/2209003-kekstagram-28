@@ -9,11 +9,11 @@ const MAX_HASHTAGS = 5;
 const HASHTAG_REGEX = /^#[a-zа-яё\d]{1,19}$/i;
 const INCORRECT_CHARS_REGEX = /[^#a-zа-яё\d]+/i;
 const ErrorMessage = {
-  length: 'Хештегов не может быть больше пяти!',
-  incorrectChar: 'В хештегах можно использовать только цифры, русские или английские буквы!',
-  incorrectHashtag: 'Неправильный хештег (слово должно быть до 20 символов с решеткой)!',
-  repeatHashtags: 'Не должно быть повторяющихся хештегов!',
-  unknown: 'Неверно введены хештеги!',
+  LENGTH: 'Хештегов не может быть больше пяти!',
+  INCORRECT_CHAR: 'В хештегах можно использовать только цифры, русские или английские буквы!',
+  INCORRECT_HASHTAG: 'Неправильный хештег (слово должно быть до 20 символов с решеткой)!',
+  REPEAT_HASHTAGS: 'Не должно быть повторяющихся хештегов!',
+  UNKNOWN: 'Неверно введены хештеги!',
 };
 
 const isCorrectHashtag = (hashtag) => HASHTAG_REGEX.test(hashtag);
@@ -47,24 +47,24 @@ export const getHashtagsErrorMessage = (value) => {
   const hashtags = getTransformHashtags(value);
 
   if (INCORRECT_CHARS_REGEX.test(hashtags.join(''))) {
-    return ErrorMessage.incorrectChar;
+    return ErrorMessage.INCORRECT_CHAR;
   }
 
   const correctHashtags = hashtags.filter(isCorrectHashtag);
 
   if (!isEqualByLength(correctHashtags, hashtags)) {
-    return ErrorMessage.incorrectHashtag;
+    return ErrorMessage.INCORRECT_HASHTAG;
   }
 
   if (!isCorrectHashtagsByLength(correctHashtags)) {
-    return ErrorMessage.length;
+    return ErrorMessage.LENGTH;
   }
 
   const correctAndUniqueHashtags = getUniqueItems(correctHashtags);
 
   if (!isEqualByLength(correctAndUniqueHashtags, hashtags)) {
-    return ErrorMessage.repeatHashtags;
+    return ErrorMessage.REPEAT_HASHTAGS;
   }
 
-  return ErrorMessage.unknown;
+  return ErrorMessage.UNKNOWN;
 };
