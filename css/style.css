@@ -302,6 +302,10 @@ main {
   border: none;
 }
 
+.img-upload__field-wrapper:not(:last-child) {
+  margin-bottom: 20px;
+}
+
 .img-upload__start {
   position: relative;
 
@@ -686,7 +690,6 @@ main {
   width: 450px;
 
   margin: 0 auto;
-  margin-bottom: 20px;
   padding: 5px 10px;
 
   font-family: "Open Sans", "Arial", sans-serif;
@@ -1407,4 +1410,18 @@ main {
 
 .hidden {
   display: none;
+}
+
+/* form validation (JavaScript) */
+.form-validation__parent--error:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.form-validation__text-error {
+  font-size: 16px;
+  color: #0dff8e;
+  text-transform: none;
+
+  max-width: 600px;
+  margin: 5px 70px 0;
 }

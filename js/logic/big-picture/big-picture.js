@@ -4,15 +4,15 @@ import {
   removeBigPictureHandlers,
 } from './big-picture-listeners.js';
 
+const START_COMMENTS_COUNT = 5;
+const NEW_COMMENTS_COUNT = 5;
+
 const bigPicture = document.querySelector('.big-picture');
 const image = bigPicture.querySelector('.big-picture__img img');
 const descriptionContainer = bigPicture.querySelector('.social__caption');
 const likesContainer = bigPicture.querySelector('.likes-count');
 
 const fillBigPicture = ({ url, description, likes, comments }) => {
-  const START_COMMENTS_COUNT = 5;
-  const NEW_COMMENTS_COUNT = 5;
-
   image.src = url;
   descriptionContainer.textContent = description;
   likesContainer.textContent = likes;

@@ -5,6 +5,8 @@ const commentsCurrentCountContainer = commentsInfoContainer.querySelector('.soci
 const commentsAllCountContainer = commentsInfoContainer.querySelector('.comments-count');
 const loadingButton = bigPicture.querySelector('.social__comments-loader');
 
+const COMMENTS_START_INDEX = 0;
+
 const userCommentTemplate = document.querySelector('#user-comment')
   .content
   .querySelector('.social__comment');
@@ -45,7 +47,7 @@ const addNewComments = (comments, startIndex, commentsCount) => {
   }
 };
 
-const addLoadingButtonClickHandler = (comments, startIndex = 0, commentsCount) => {
+const addLoadingButtonClickHandler = (comments, startIndex, commentsCount) => {
   if (loadingButtonClickHandler) {
     removeLoadingButtonClickHandler();
   }
@@ -76,6 +78,6 @@ export const fillUserComments = (
   commentsContainer.replaceChildren();
   loadingButton.classList.remove('hidden');
 
-  addNewComments(comments, null, startCount);
+  addNewComments(comments, COMMENTS_START_INDEX, startCount);
   addLoadingButtonClickHandler(comments, startCount, newCommentsCount);
 };
