@@ -1,4 +1,4 @@
-import { validator } from '../validation/index.js';
+import { validator } from './validate.js';
 
 const pictureRedactorForm = document.querySelector('.img-upload__form');
 
