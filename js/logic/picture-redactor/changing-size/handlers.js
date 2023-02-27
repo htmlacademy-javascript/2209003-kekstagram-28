@@ -14,6 +14,9 @@ const transformNumberToPercent = (number) => `${number}%`;
 const changeImageSize = (coefficient) => (
   image.style.transform = `scale(${coefficient})`
 );
+const clearImageSize = () => {
+  changeImageSize(START_SIZE / 100);
+};
 
 const decreasingButtonClickHandler = () => {
   const sizeValue = transformPercentToNumber(changingSizeInput.value);
@@ -41,12 +44,14 @@ const increasingButtonClickHandler = () => {
 
 export const addChangingSizeHandlers = () => {
   changingSizeInput.value = transformNumberToPercent(START_SIZE);
+  changeImageSize(START_SIZE / 100);
 
   decreasingButton.addEventListener('click', decreasingButtonClickHandler);
   increasingButton.addEventListener('click', increasingButtonClickHandler);
 };
 
 export const removeChangingSizeHandlers = () => {
+  clearImageSize();
   decreasingButton.removeEventListener('click', decreasingButtonClickHandler);
   increasingButton.removeEventListener('click', increasingButtonClickHandler);
 };

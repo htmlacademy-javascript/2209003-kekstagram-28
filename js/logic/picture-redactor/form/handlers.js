@@ -14,4 +14,5 @@ export const addPictureRedactorValidateHandler = () => {
 
 export const removePictureRedactorValidateHandler = () => {
   pictureRedactorForm.removeEventListener('submit', pictureRedactorFormSubmitHandler);
+  validator.reset();
 };
