@@ -1,6 +1,6 @@
-import { SliderSettings } from './mock.js';
+import { Filters, SliderSettings } from './mock.js';
 
-const DEFAULT_FILTER = 'none';
+const DEFAULT_FILTER = Filters.NONE;
 
 const parent = document.querySelector('.img-upload__overlay');
 const sliderParent = parent.querySelector('.effect-level');
@@ -12,19 +12,19 @@ const setImageCssFilter = (filterName, filterLevelValue) => {
   let imageFilter = '';
 
   switch (filterName) {
-    case 'chrome':
+    case Filters.CHROME:
       imageFilter = `grayscale(${filterLevelValue})`;
       break;
-    case 'sepia':
+    case Filters.SEPIA:
       imageFilter = `sepia(${filterLevelValue})`;
       break;
-    case 'marvin':
+    case Filters.MARVIN:
       imageFilter = `invert(${filterLevelValue}%)`;
       break;
-    case 'phobos':
+    case Filters.PHOBOS:
       imageFilter = `blur(${filterLevelValue}px)`;
       break;
-    case 'heat':
+    case Filters.HEAT:
       imageFilter = `brightness(${filterLevelValue})`;
       break;
     default:
@@ -42,7 +42,7 @@ export const setNewFilter = (newFilterName) => {
   currentFilter = newFilterName;
   setImageCssFilter(currentFilter, getFilterLevelValue());
 
-  if (currentFilter === 'none') {
+  if (currentFilter === Filters.NONE) {
     sliderParent.hidden = true;
     image.className = '';
     filterLevel.value = '';
@@ -52,7 +52,7 @@ export const setNewFilter = (newFilterName) => {
 
   sliderParent.hidden = false;
   image.className = `effects__preview--${currentFilter}`;
-  slider.noUiSlider.updateOptions(SliderSettings[currentFilter.toUpperCase()]);
+  slider.noUiSlider.updateOptions(SliderSettings[currentFilter]);
 };
 
 const sliderUpdateHandler = () => {
@@ -61,7 +61,7 @@ const sliderUpdateHandler = () => {
 };
 
 export const createSlider = () => {
-  noUiSlider.create(slider, SliderSettings.DEFAULT);
+  noUiSlider.create(slider, SliderSettings[DEFAULT_FILTER]);
   setNewFilter(DEFAULT_FILTER);
   slider.noUiSlider.on('update', sliderUpdateHandler);
 };

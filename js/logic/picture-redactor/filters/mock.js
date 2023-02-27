@@ -1,5 +1,14 @@
+export const Filters = {
+  NONE: 'none',
+  CHROME: 'chrome',
+  SEPIA: 'sepia',
+  MARVIN: 'marvin',
+  PHOBOS: 'phobos',
+  HEAT: 'heat',
+};
+
 export const SliderSettings = {
-  DEFAULT: {
+  [Filters.NONE]: {
     start: 100,
     step: 1,
     connect: 'lower',
@@ -8,41 +17,46 @@ export const SliderSettings = {
       max: 100
     },
   },
-  CHROME: {
+  [Filters.CHROME]: {
     start: 1,
     step: 0.1,
+    connect: 'lower',
     range: {
       min: 0,
       max: 1,
     },
   },
-  SEPIA: {
+  [Filters.SEPIA]: {
     start: 1,
     step: 0.1,
+    connect: 'lower',
     range: {
       min: 0,
       max: 1,
     },
   },
-  MARVIN: {
+  [Filters.MARVIN]: {
     start: 100,
     step: 1,
+    connect: 'lower',
     range: {
       min: 0,
       max: 100,
     },
   },
-  PHOBOS: {
+  [Filters.PHOBOS]: {
     start: 3,
     step: 0.1,
+    connect: 'lower',
     range: {
       min: 0,
       max: 3,
     },
   },
-  HEAT: {
+  [Filters.HEAT]: {
     start: 3,
     step: 0.1,
+    connect: 'lower',
     range: {
       min: 1,
       max: 3,
