@@ -1,4 +1,4 @@
-import { isCorrectHashtags, getHashtagsErrorMessage } from './hashtags.js';
+import { isCorrectHashtags, getHashtagsErrorMessage } from '../hashtags/index.js';
 
 const newPictureForm = document.querySelector('.img-upload__form');
 const hashtagsInput = newPictureForm.querySelector('.text__hashtags');

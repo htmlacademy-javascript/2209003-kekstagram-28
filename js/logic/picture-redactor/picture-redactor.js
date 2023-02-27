@@ -1,11 +1,4 @@
-import {
-  addPictureRedactorModalHandlers,
-  removePictureRedactorModalHandlers,
-  addPictureRedactorValidateHandler,
-  removePictureRedactorValidateHandler,
-  addTextInputsHandlers,
-  removeTextInputsHandlers,
-} from './handlers/index.js';
+import { addDefaultHandlers, removeDefaultHandlers } from './handlers.js';
 import { handleFileUrl } from '../../helpers/file.js';
 
 const pictureRedactor = document.querySelector('.img-upload__overlay');
@@ -27,18 +20,14 @@ const fillPictureRedactor = (file, callback) => {
 
 export const openPictureRedactor = (file) => {
   fillPictureRedactor(file, () => {
-    addPictureRedactorModalHandlers();
-    addPictureRedactorValidateHandler();
-    addTextInputsHandlers();
+    addDefaultHandlers();
     document.body.classList.add('modal-open');
     pictureRedactor.classList.remove('hidden');
   });
 };
 
 export const closePictureRedactor = () => {
-  removePictureRedactorModalHandlers();
-  removePictureRedactorValidateHandler();
-  removeTextInputsHandlers();
+  removeDefaultHandlers();
   document.body.classList.remove('modal-open');
   pictureRedactor.classList.add('hidden');
   pictureRedactorForm.reset();

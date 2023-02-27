@@ -1,4 +1,4 @@
-import { addModalKeydownHandler, removeModalKeydownHandler } from './modal.js';
+import { addModalKeydownHandler, removeModalKeydownHandler } from '../modal/index.js';
 
 const inputsContainer = document.querySelector('.img-upload__text');
 const hashtagsInput = inputsContainer.querySelector('.text__hashtags');
