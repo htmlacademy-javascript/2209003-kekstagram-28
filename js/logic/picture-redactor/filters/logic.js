@@ -7,6 +7,7 @@ const sliderParent = parent.querySelector('.effect-level');
 const slider = sliderParent.querySelector('.effect-level__slider');
 const filterLevel = sliderParent.querySelector('.effect-level__value');
 const image = parent.querySelector('.img-upload__preview img');
+const filterItems = parent.querySelectorAll('.effects__radio');
 
 const setImageCssFilter = (filterName, filterLevelValue) => {
   let imageFilter = '';
@@ -35,11 +36,21 @@ const setImageCssFilter = (filterName, filterLevelValue) => {
   image.style.filter = imageFilter;
 };
 
+const setActiveFilterItem = (filterName) => {
+  for (const filterItem of filterItems) {
+    if (filterItem.value === filterName) {
+      filterItem.checked = true;
+      return;
+    }
+  }
+};
+
 const getFilterLevelValue = () => filterLevel.value;
 
 let currentFilter;
 export const setNewFilter = (newFilterName) => {
   currentFilter = newFilterName;
+  setActiveFilterItem(currentFilter);
   setImageCssFilter(currentFilter, getFilterLevelValue());
 
   if (currentFilter === Filters.NONE) {
