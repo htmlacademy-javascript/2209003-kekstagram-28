@@ -1,14 +1,11 @@
 import { closePictureRedactor } from '../picture-redactor.js';
+import { addDocumentEscapeKeydownHandler } from '../../../helpers/handlers.js';
 
 const closingButton = document.querySelector('.img-upload__cancel');
 
-const documentKeydownHandler = (event) => {
-  if (event.key.startsWith('Esc')) {
-    event.preventDefault();
-
-    closePictureRedactor();
-  }
-};
+const documentKeydownHandler = (event) => (
+  addDocumentEscapeKeydownHandler(event, closePictureRedactor)
+);
 
 const closingButtonClickHandler = () => closePictureRedactor();
 
