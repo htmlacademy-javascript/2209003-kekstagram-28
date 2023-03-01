@@ -1,28 +1,52 @@
 import { createPicture } from './gallery-picture.js';
 import { addPicturesContainerClickHandler } from './gallery-listeners.js';
+import { getPhotosData } from '../../api/getPhotosData.js';
 
-import { photos } from '../../data/photos.js';
+const ERROR_MESSAGE_TIME = 3_000;
+const ERROR_MESSAGE_TEXT = 'Не получилось скачать фотографии :( Подождите немного мы сейчас повторим запрос!';
+const REPEATED_FETCH_TIME = 7_000;
 
 const picturesContainer = document.querySelector('.pictures');
+const errorContainer = document.querySelector('.error-message');
+const errorMessage = errorContainer.querySelector('.error-message__text');
 
-let picturesClickHandler = null;
+let photos = null;
+export const getPhotos = () => photos;
 
+let lastPicturesClickHandler = null;
 const removePicturesClickHandler = () => {
-  picturesContainer.removeEventListener('click', picturesClickHandler);
+  picturesContainer.removeEventListener('click', lastPicturesClickHandler);
 };
 
 export const renderGalleryPhotos = (clickPicturesCallback) => {
-  if (picturesClickHandler) {
-    removePicturesClickHandler();
-  }
+  getPhotosData()
+    .then((photosData) => {
+      photos = photosData;
 
-  if (clickPicturesCallback) {
-    picturesClickHandler = (event) => (
-      addPicturesContainerClickHandler(event, clickPicturesCallback)
-    );
+      if (lastPicturesClickHandler) {
+        removePicturesClickHandler();
+      }
 
-    picturesContainer.addEventListener('click', picturesClickHandler);
-  }
+      if (clickPicturesCallback) {
+        lastPicturesClickHandler = (event) => (
+          addPicturesContainerClickHandler(event, clickPicturesCallback)
+        );
 
-  picturesContainer.append(...photos.map(createPicture));
+        picturesContainer.addEventListener('click', lastPicturesClickHandler);
+      }
+
+      picturesContainer.append(...photos.map(createPicture));
+    })
+    .catch(() => {
+      errorMessage.textContent = ERROR_MESSAGE_TEXT;
+      errorContainer.hidden = false;
+
+      setTimeout(() => {
+        errorContainer.hidden = true;
+      }, ERROR_MESSAGE_TIME);
+
+      setTimeout(() => {
+        renderGalleryPhotos(clickPicturesCallback);
+      }, REPEATED_FETCH_TIME);
+    });
 };
