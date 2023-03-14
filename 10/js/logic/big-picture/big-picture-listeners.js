@@ -1,5 +1,5 @@
 import { closeBigPicture } from './big-picture.js';
-import { addDocumentEscapeKeydownHandler } from '../../helpers/handlers.js';
+import { handleAddDocumentEscapeKeydown } from '../../helpers/handlers.js';
 
 const closingButton = document
   .querySelector('.big-picture')
@@ -12,7 +12,7 @@ const closingButtonClickHandler = (event) => {
 };
 
 const documentKeydownHandler = (event) => (
-  addDocumentEscapeKeydownHandler(event, closeBigPicture)
+  handleAddDocumentEscapeKeydown(event, closeBigPicture)
 );
 
 export const addBigPictureHandlers = () => {

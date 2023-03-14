@@ -1,4 +1,4 @@
-export const addDocumentEscapeKeydownHandler = (event, callback) => {
+export const handleAddDocumentEscapeKeydown = (event, callback) => {
   if (event.key.startsWith('Esc')) {
     event.preventDefault();
 
@@ -6,7 +6,7 @@ export const addDocumentEscapeKeydownHandler = (event, callback) => {
   }
 };
 
-export const addElementOutClickHandler = (event, element, callback) => {
+export const handleAddElementOutClick = (event, element, callback) => {
   if (element.contains(event.target)) {
     return;
   }

@@ -256,9 +256,9 @@
   <!-- Сообщение с ошибкой загрузки изображения -->
   <template id="error">
     <section class="error">
-      <div class="error__inner">
+      <div class="error__inner" data-message-content>
         <h2 class="error__title">Ошибка загрузки файла</h2>
-        <button type="button" class="error__button">Попробовать ещё раз</button>
+        <button type="button" class="error__button" data-message-closing-button>Попробовать ещё раз</button>
       </div>
     </section>
   </template>
@@ -266,9 +266,9 @@
   <!-- Сообщение об успешной загрузке изображения -->
   <template id="success">
     <section class="success">
-      <div class="success__inner">
+      <div class="success__inner" data-message-content>
         <h2 class="success__title">Изображение успешно загружено</h2>
-        <button type="button" class="success__button">Круто!</button>
+        <button type="button" class="success__button" data-message-closing-button>Круто!</button>
       </div>
     </section>
   </template>
@@ -277,6 +277,5 @@
   <template id="messages">
     <div class="img-upload__message  img-upload__message--loading">Загружаем...</div>
   </template>
-
 </body>
 </html>

@@ -19,10 +19,6 @@ const fillPictureRedactor = (file, callback) => {
 };
 
 export const openPictureRedactor = (file) => {
-  if (!file) {
-    return;
-  }
-
   fillPictureRedactor(file, () => {
     addDefaultHandlers();
     document.body.classList.add('modal-open');
