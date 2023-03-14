@@ -1,4 +1,4 @@
-import { fetchData } from './fetchData.js';
+import { fetchData } from './fetch-data.js';
 
 const PHOTO_URL = 'https://28.javascript.pages.academy/kekstagram';
 

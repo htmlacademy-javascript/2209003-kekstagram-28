@@ -1,6 +1,6 @@
 import { createPicture } from './gallery-picture.js';
 import { addPicturesContainerClickHandler } from './gallery-listeners.js';
-import { getPhotosData } from '../../api/getPhotosData.js';
+import { getPhotosData } from '../../api/get-photos-data.js';
 
 const ERROR_MESSAGE_TIME = 3_000;
 const ERROR_MESSAGE_TEXT = 'Не получилось скачать фотографии :( Подождите немного мы сейчас повторим запрос!';
