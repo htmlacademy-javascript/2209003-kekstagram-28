@@ -313,6 +313,6 @@
   cursor: grabbing;
 }
 
-.noUi-base {
+.noUi-base:not(:active) {
   cursor: pointer;
 }

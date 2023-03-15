@@ -1,1 +1,1 @@
-export { addPictureGetterChangeHandler } from './picture-getter.js';
+export { addPictureGetterHandlers } from './picture-getter.js';

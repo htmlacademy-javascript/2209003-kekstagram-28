@@ -1,4 +1,4 @@
-import { findPhoto } from '../../data/photos.js';
+import { getPhotos } from './gallery.js';
 
 export const addPicturesContainerClickHandler = (event, clickPicturesCallback) => {
   const picture = event.target.closest('.picture');
@@ -9,6 +9,7 @@ export const addPicturesContainerClickHandler = (event, clickPicturesCallback) =
 
   event.preventDefault();
 
+  const photos = getPhotos();
   const id = Number(picture.dataset.id);
-  clickPicturesCallback(findPhoto(id));
+  clickPicturesCallback(photos?.find((photo) => photo.id === id));
 };

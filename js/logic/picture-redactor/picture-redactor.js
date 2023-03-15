@@ -26,9 +26,12 @@ export const openPictureRedactor = (file) => {
   });
 };
 
-export const closePictureRedactor = () => {
+export const closePictureRedactor = (willClear = true) => {
   removeDefaultHandlers();
   document.body.classList.remove('modal-open');
   pictureRedactor.classList.add('hidden');
-  pictureRedactorForm.reset();
+
+  if (willClear) {
+    pictureRedactorForm.reset();
+  }
 };
