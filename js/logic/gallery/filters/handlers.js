@@ -3,10 +3,11 @@ import {
   showRandomPhotos,
   showDiscussedPhotos,
 } from './logic.js';
-import { debounce } from './../../../helpers/decorators.js';
+import { debounce, throttle } from './../../../helpers/decorators.js';
 
 const COUNT_RANDOM_PHOTOS = 10;
 const ACTIVE_CLASS = 'img-filters__button--active';
+const FILTER_CLICK_THROTTLE_TIME = 500;
 
 const filtersContainer = document.querySelector('.img-filters');
 const filters = filtersContainer.querySelectorAll('.img-filters__button');
@@ -22,7 +23,10 @@ const cleanAllFilters = () => {
   });
 };
 
-const handleFilterClick = (filter) => {
+const handleFilterClick = throttle((filter) => {
+  cleanAllFilters();
+  filter.classList.add(ACTIVE_CLASS);
+
   switch (filter) {
     case defaultPhotosButton:
       debounce(showDefaultPhotos)();
@@ -34,7 +38,7 @@ const handleFilterClick = (filter) => {
       debounce(showDiscussedPhotos)();
       break;
   }
-};
+}, FILTER_CLICK_THROTTLE_TIME);
 
 const filtersContainerClickHandler = (event) => {
   const filter = event.target.closest('.img-filters__button');
@@ -44,9 +48,6 @@ const filtersContainerClickHandler = (event) => {
   }
 
   event.preventDefault();
-
-  cleanAllFilters();
-  filter.classList.add(ACTIVE_CLASS);
 
   handleFilterClick(filter);
 };
