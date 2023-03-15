@@ -13,3 +13,5 @@ export const createPicture = ({ id, url, likes, comments }) => {
 
   return picture;
 };
+
+export const isPicture = (picture) => picture.classList.contains('picture');
