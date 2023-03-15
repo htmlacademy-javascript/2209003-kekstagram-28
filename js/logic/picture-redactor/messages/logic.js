@@ -14,9 +14,14 @@ const errorMessageTemplate = document
   .content
   .querySelector('.error');
 
-const messagesTemplates = {
-  'success': successMessageTemplate,
-  'error': errorMessageTemplate,
+const MESSAGES_TYPES = {
+  SUCCESS: 'success',
+  ERROR: 'error',
+};
+
+const MESSAGES_TEMPLATES = {
+  [MESSAGES_TYPES.SUCCESS]: successMessageTemplate,
+  [MESSAGES_TYPES.ERROR]: errorMessageTemplate,
 };
 
 let currentMessage = null;
@@ -64,9 +69,16 @@ export const closeMessage = () => {
   removeMessage();
 };
 
-// messageName should equal keys of messagesTemplates!
-export const openMessages = (messageName) => {
-  const newMessage = messagesTemplates[messageName].cloneNode(true);
+const openMessage = (messageName) => {
+  const newMessage = MESSAGES_TEMPLATES[messageName].cloneNode(true);
 
   addMessage(newMessage);
+};
+
+export const openSuccessMessage = () => {
+  openMessage(MESSAGES_TYPES.SUCCESS);
+};
+
+export const openErrorMessage = () => {
+  openMessage(MESSAGES_TYPES.ERROR);
 };

@@ -1,7 +1,7 @@
 import { closePictureRedactor } from '../picture-redactor.js';
 import { validator } from './validate.js';
 import { sendPhotoData } from '../../../api/send-photo-data.js';
-import { openMessages } from '../messages/logic.js';
+import { openSuccessMessage, openErrorMessage } from '../messages/logic.js';
 
 const pictureRedactorForm = document.querySelector('.img-upload__form');
 const submittingButton = pictureRedactorForm.querySelector('.img-upload__submit');
@@ -15,10 +15,10 @@ const pictureRedactorFormSubmitHandler = (event) => {
     sendPhotoData(data)
       .then(() => {
         closePictureRedactor();
-        openMessages('success');
+        openSuccessMessage();
       })
       .catch(() => {
-        openMessages('error');
+        openErrorMessage();
       })
       .finally(() => {
         submittingButton.disabled = false;
