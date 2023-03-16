@@ -1,52 +1,63 @@
-import { createPicture } from './gallery-picture.js';
-import { addPicturesContainerClickHandler } from './gallery-listeners.js';
+import { createPicture, isPicture } from './pictures/index.js';
+import {
+  addPicturesContainerClickHandler,
+  removePicturesContainerClickHandler,
+} from './gallery-listeners.js';
 import { getPhotosData } from '../../api/get-photos-data.js';
+import { showFilters } from './filters/index.js';
 
-const ERROR_MESSAGE_TIME = 3_000;
-const ERROR_MESSAGE_TEXT = 'Не получилось скачать фотографии :( Подождите немного мы сейчас повторим запрос!';
-const REPEATED_FETCH_TIME = 7_000;
-
+const ERROR_MESSAGE_TEXT = `
+  Не получилось скачать фотографии :(
+  Попробуйте перезагрузить страницу или же вернитесь позже
+`;
 const picturesContainer = document.querySelector('.pictures');
 const errorContainer = document.querySelector('.error-message');
 const errorMessage = errorContainer.querySelector('.error-message__text');
 
-let photos = null;
-export const getPhotos = () => photos;
+let currentPhotos = null;
+const updateCurrentPhotos = (newPhotos) => {
+  currentPhotos = newPhotos;
+};
+export const getCurrentPhotos = () => currentPhotos;
 
-let lastPicturesClickHandler = null;
-const removePicturesClickHandler = () => {
-  picturesContainer.removeEventListener('click', lastPicturesClickHandler);
+const getNewPhotos = async () => {
+  try {
+    return await getPhotosData();
+  } catch (_error) {
+    errorMessage.textContent = ERROR_MESSAGE_TEXT;
+    errorContainer.hidden = false;
+
+    return [];
+  }
 };
 
-export const renderGalleryPhotos = (clickPicturesCallback) => {
-  getPhotosData()
-    .then((photosData) => {
-      photos = photosData;
+const removeAllPicture = () => {
+  picturesContainer.querySelectorAll('section > *').forEach((element) => {
+    if (isPicture(element)) {
+      element.remove();
+    }
+  });
+};
 
-      if (lastPicturesClickHandler) {
-        removePicturesClickHandler();
-      }
+export const renderPhotos = (newPhotos) => {
+  removeAllPicture();
+  picturesContainer.append(...newPhotos.map(createPicture));
+};
 
-      if (clickPicturesCallback) {
-        lastPicturesClickHandler = (event) => (
-          addPicturesContainerClickHandler(event, clickPicturesCallback)
-        );
+export const renderGalleryPhotos = async (clickPicturesCallback) => {
+  const newPhotos = await getNewPhotos();
 
-        picturesContainer.addEventListener('click', lastPicturesClickHandler);
-      }
+  if (newPhotos.length === 0) {
+    return;
+  }
 
-      picturesContainer.append(...photos.map(createPicture));
-    })
-    .catch(() => {
-      errorMessage.textContent = ERROR_MESSAGE_TEXT;
-      errorContainer.hidden = false;
+  // remove if old handler there is and after add new
+  removePicturesContainerClickHandler();
+  addPicturesContainerClickHandler(clickPicturesCallback);
 
-      setTimeout(() => {
-        errorContainer.hidden = true;
-      }, ERROR_MESSAGE_TIME);
+  renderPhotos(newPhotos);
 
-      setTimeout(() => {
-        renderGalleryPhotos(clickPicturesCallback);
-      }, REPEATED_FETCH_TIME);
-    });
+  updateCurrentPhotos(newPhotos);
+
+  showFilters();
 };

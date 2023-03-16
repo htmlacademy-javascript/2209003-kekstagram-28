@@ -1442,6 +1442,7 @@ main {
   border-radius: 10px;
 
   padding: 15px 25px;
+  margin-left: 40px;
 }
 
 .error-message__text {

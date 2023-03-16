@@ -1,6 +1,8 @@
-import { getPhotos } from './gallery.js';
+import { getCurrentPhotos } from './gallery.js';
 
-export const addPicturesContainerClickHandler = (event, clickPicturesCallback) => {
+const picturesContainer = document.querySelector('.pictures');
+
+const handlePictureClick = (event, clickPicturesCallback) => {
   const picture = event.target.closest('.picture');
 
   if (!picture) {
@@ -9,7 +11,24 @@ export const addPicturesContainerClickHandler = (event, clickPicturesCallback) =
 
   event.preventDefault();
 
-  const photos = getPhotos();
+  const photos = getCurrentPhotos();
   const id = Number(picture.dataset.id);
   clickPicturesCallback(photos?.find((photo) => photo.id === id));
+};
+
+let picturesContainerClickHandler = null;
+const updatePicturesContainerHandler = (newHandler) => {
+  picturesContainerClickHandler = newHandler;
+};
+
+export const addPicturesContainerClickHandler = (clickPicturesCallback) => {
+  updatePicturesContainerHandler((event) => {
+    handlePictureClick(event, clickPicturesCallback);
+  });
+
+  picturesContainer.addEventListener('click', picturesContainerClickHandler);
+};
+
+export const removePicturesContainerClickHandler = () => {
+  picturesContainer.addEventListener('click', picturesContainerClickHandler);
 };
