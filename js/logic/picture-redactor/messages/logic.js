@@ -4,6 +4,11 @@ import {
   handleMessageOutClick,
 } from './handlers.js';
 
+const MessageType = {
+  SUCCESS: 'success',
+  ERROR: 'error',
+};
+
 const successMessageTemplate = document
   .querySelector('#success')
   .content
@@ -14,14 +19,9 @@ const errorMessageTemplate = document
   .content
   .querySelector('.error');
 
-const MESSAGES_TYPES = {
-  SUCCESS: 'success',
-  ERROR: 'error',
-};
-
-const MESSAGES_TEMPLATES = {
-  [MESSAGES_TYPES.SUCCESS]: successMessageTemplate,
-  [MESSAGES_TYPES.ERROR]: errorMessageTemplate,
+const messageToTemplate = {
+  [MessageType.SUCCESS]: successMessageTemplate,
+  [MessageType.ERROR]: errorMessageTemplate,
 };
 
 let currentMessage = null;
@@ -70,15 +70,15 @@ export const closeMessage = () => {
 };
 
 const openMessage = (messageName) => {
-  const newMessage = MESSAGES_TEMPLATES[messageName].cloneNode(true);
+  const newMessage = messageToTemplate[messageName].cloneNode(true);
 
   addMessage(newMessage);
 };
 
 export const openSuccessMessage = () => {
-  openMessage(MESSAGES_TYPES.SUCCESS);
+  openMessage(MessageType.SUCCESS);
 };
 
 export const openErrorMessage = () => {
-  openMessage(MESSAGES_TYPES.ERROR);
+  openMessage(MessageType.ERROR);
 };

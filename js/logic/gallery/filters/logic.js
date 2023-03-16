@@ -7,7 +7,7 @@ import { getRandomItems } from '../../../helpers/random.js';
 
 const filtersContainer = document.querySelector('.img-filters');
 
-export const showDefaultPhotos = () => {
+export const showStartPhotos = () => {
   const photos = getCurrentPhotos();
 
   renderPhotos(photos);

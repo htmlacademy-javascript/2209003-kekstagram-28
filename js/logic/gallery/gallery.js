@@ -26,6 +26,8 @@ const getNewPhotos = async () => {
   } catch (_error) {
     errorMessage.textContent = ERROR_MESSAGE_TEXT;
     errorContainer.hidden = false;
+
+    return [];
   }
 };
 
@@ -44,6 +46,10 @@ export const renderPhotos = (newPhotos) => {
 
 export const renderGalleryPhotos = async (clickPicturesCallback) => {
   const newPhotos = await getNewPhotos();
+
+  if (newPhotos.length === 0) {
+    return;
+  }
 
   // remove if old handler there is and after add new
   removePicturesContainerClickHandler();

@@ -1,5 +1,5 @@
 import {
-  showDefaultPhotos,
+  showStartPhotos,
   showRandomPhotos,
   showDiscussedPhotos,
 } from './logic.js';
@@ -7,29 +7,38 @@ import { debounce, throttle } from './../../../helpers/decorators.js';
 
 const COUNT_RANDOM_PHOTOS = 10;
 const ACTIVE_CLASS = 'img-filters__button--active';
-const FILTER_CLICK_THROTTLE_TIME = 500;
+const FILTER_CLICK_THROTTLE_TIME = 250;
 
 const filtersContainer = document.querySelector('.img-filters');
-const filters = filtersContainer.querySelectorAll('.img-filters__button');
-const defaultPhotosButton = filtersContainer.querySelector('#filter-default');
+const startPhotosButton = filtersContainer.querySelector('#filter-default');
 const randomPhotosButton = filtersContainer.querySelector('#filter-random');
 const discussedPhotosButton = filtersContainer.querySelector('#filter-discussed');
+const defaultPhotosButton = filtersContainer
+  .querySelector('img-filters__button--active') ?? startPhotosButton;
 
-const isActiveFilter = (filter) => filter.classList.contains(ACTIVE_CLASS);
+let activeFilter = defaultPhotosButton;
+const setNewActiveFilter = (newFilter) => {
+  // for click on repeated filter
+  if (activeFilter === newFilter) {
+    return;
+  }
 
-const cleanAllFilters = () => {
-  filters.forEach((filter) => {
-    filter.classList.remove(ACTIVE_CLASS);
-  });
+  activeFilter.classList.remove(ACTIVE_CLASS);
+  newFilter.classList.add(ACTIVE_CLASS);
+  activeFilter = newFilter;
 };
 
 const handleFilterClick = throttle((filter) => {
-  cleanAllFilters();
-  filter.classList.add(ACTIVE_CLASS);
+  // for click on repeated filter
+  if (activeFilter === filter && filter !== randomPhotosButton) {
+    return;
+  }
+
+  setNewActiveFilter(filter);
 
   switch (filter) {
-    case defaultPhotosButton:
-      debounce(showDefaultPhotos)();
+    case startPhotosButton:
+      debounce(showStartPhotos)();
       break;
     case randomPhotosButton:
       debounce(showRandomPhotos)(COUNT_RANDOM_PHOTOS);
@@ -43,7 +52,7 @@ const handleFilterClick = throttle((filter) => {
 const filtersContainerClickHandler = (event) => {
   const filter = event.target.closest('.img-filters__button');
 
-  if (!filter || isActiveFilter(filter)) {
+  if (!filter) {
     return;
   }
 

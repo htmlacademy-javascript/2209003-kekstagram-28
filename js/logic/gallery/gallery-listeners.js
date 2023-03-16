@@ -22,13 +22,11 @@ const updatePicturesContainerHandler = (newHandler) => {
 };
 
 export const addPicturesContainerClickHandler = (clickPicturesCallback) => {
-  const newPicturesContainerHandler = (event) => {
+  updatePicturesContainerHandler((event) => {
     handlePictureClick(event, clickPicturesCallback);
-  };
+  });
 
-  updatePicturesContainerHandler(newPicturesContainerHandler);
-
-  picturesContainer.addEventListener('click', newPicturesContainerHandler);
+  picturesContainer.addEventListener('click', picturesContainerClickHandler);
 };
 
 export const removePicturesContainerClickHandler = () => {
