@@ -12,8 +12,9 @@ const image = bigPicture.querySelector('.big-picture__img img');
 const descriptionContainer = bigPicture.querySelector('.social__caption');
 const likesContainer = bigPicture.querySelector('.likes-count');
 
-const fillBigPicture = ({ url, description, likes, comments }) => {
+const fillBigPicture = ({ url, description, likes, comments, style = '' }) => {
   image.src = url;
+  image.style = style;
   descriptionContainer.textContent = description;
   likesContainer.textContent = likes;
 

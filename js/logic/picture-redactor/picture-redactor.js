@@ -1,29 +1,35 @@
 import { addDefaultHandlers, removeDefaultHandlers } from './handlers.js';
-import { handleFileUrl } from '../../helpers/file.js';
+import { addCallbackAfterSuccessFormSubmit } from './form/handlers.js';
 
 const pictureRedactor = document.querySelector('.img-upload__overlay');
 const bigPicture = pictureRedactor.querySelector('.img-upload__preview img');
 const smallPictures = pictureRedactor.querySelectorAll('.effects__preview');
 const pictureRedactorForm = document.querySelector('.img-upload__form');
 
-const fillPictureRedactor = (file, callback) => {
-  handleFileUrl(file, (fileUrl) => {
-    bigPicture.src = fileUrl;
+let fileUrl = null;
+const updateFileUrl = (file) => {
+  fileUrl = URL.createObjectURL(file);
+};
+const resetFileUrl = () => {
+  URL.revokeObjectURL(fileUrl);
+  fileUrl = null;
+};
 
-    smallPictures.forEach((smallPicture) => {
-      smallPicture.style.backgroundImage = `url("${fileUrl}")`;
-    });
+const fillPictureRedactor = (file) => {
+  updateFileUrl(file);
+  bigPicture.src = fileUrl;
 
-    callback();
+  smallPictures.forEach((smallPicture) => {
+    smallPicture.style.backgroundImage = `url("${fileUrl}")`;
   });
 };
 
-export const openPictureRedactor = (file) => {
-  fillPictureRedactor(file, () => {
-    addDefaultHandlers();
-    document.body.classList.add('modal-open');
-    pictureRedactor.classList.remove('hidden');
-  });
+export const openPictureRedactor = (file, callbackAfterClose) => {
+  fillPictureRedactor(file);
+  addDefaultHandlers();
+  addCallbackAfterSuccessFormSubmit(callbackAfterClose);
+  document.body.classList.add('modal-open');
+  pictureRedactor.classList.remove('hidden');
 };
 
 export const closePictureRedactor = (willClear = true) => {
@@ -34,4 +40,6 @@ export const closePictureRedactor = (willClear = true) => {
   if (willClear) {
     pictureRedactorForm.reset();
   }
+
+  resetFileUrl();
 };

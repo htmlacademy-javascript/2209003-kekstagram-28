@@ -2,9 +2,18 @@ import { closePictureRedactor } from '../picture-redactor.js';
 import { validator } from './validate.js';
 import { sendPhotoData } from '../../../api/send-photo-data.js';
 import { openSuccessMessage, openErrorMessage } from '../messages/logic.js';
+import { transformFormData } from './logic.js';
 
 const pictureRedactorForm = document.querySelector('.img-upload__form');
 const submittingButton = pictureRedactorForm.querySelector('.img-upload__submit');
+
+let callbackAfterSuccessFormSubmit = null;
+export const addCallbackAfterSuccessFormSubmit = (newCallback) => {
+  callbackAfterSuccessFormSubmit = newCallback;
+};
+const resetCallbackAfterSuccessFormSubmit = () => {
+  callbackAfterSuccessFormSubmit = null;
+};
 
 const pictureRedactorFormSubmitHandler = (event) => {
   event.preventDefault();
@@ -14,6 +23,9 @@ const pictureRedactorFormSubmitHandler = (event) => {
     submittingButton.disabled = true;
     sendPhotoData(data)
       .then(() => {
+        callbackAfterSuccessFormSubmit?.(transformFormData(data));
+        resetCallbackAfterSuccessFormSubmit();
+
         closePictureRedactor();
         openSuccessMessage();
       })

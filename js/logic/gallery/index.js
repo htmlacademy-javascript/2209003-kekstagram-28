@@ -1,1 +1,1 @@
-export { renderGalleryPhotos } from './gallery.js';
+export { renderGalleryPhotos, addNewPhotoInGallery } from './gallery.js';
