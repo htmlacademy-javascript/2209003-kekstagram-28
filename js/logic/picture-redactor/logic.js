@@ -1,5 +1,5 @@
 import { addDefaultHandlers, removeDefaultHandlers } from './handlers.js';
-import { addCallbackAfterSuccessFormSubmit } from './form/handlers.js';
+import { addCallbackAfterSuccessFormSubmit } from './form/index.js';
 
 const pictureRedactor = document.querySelector('.img-upload__overlay');
 const bigPicture = pictureRedactor.querySelector('.img-upload__preview img');

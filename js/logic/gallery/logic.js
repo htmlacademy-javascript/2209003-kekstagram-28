@@ -2,7 +2,7 @@ import { createPicture, isPicture } from './pictures/index.js';
 import {
   addPicturesContainerClickHandler,
   removePicturesContainerClickHandler,
-} from './gallery-listeners.js';
+} from './handlers.js';
 import { getPhotosData } from '../../api/get-photos-data.js';
 import { showFilters } from './filters/index.js';
 import { getIdGenerator } from '../../helpers/id.js';

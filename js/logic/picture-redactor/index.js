@@ -1,1 +1,1 @@
-export { openPictureRedactor } from './picture-redactor.js';
+export { openPictureRedactor } from './logic.js';

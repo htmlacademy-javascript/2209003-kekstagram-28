@@ -1,4 +1,4 @@
-import { closePictureRedactor } from '../picture-redactor.js';
+import { closePictureRedactor } from '../logic.js';
 import { handleAddDocumentEscapeKeydown } from '../../../helpers/handlers.js';
 
 const closingButton = document.querySelector('.img-upload__cancel');

@@ -1,4 +1,4 @@
-import { getCssFilterValue } from '../filters/logic.js';
+import { getCssFilterValue } from '../filters/index.js';
 
 export const transformFormData = (formData) => {
   const url = URL.createObjectURL(formData.get('filename'));

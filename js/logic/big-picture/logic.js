@@ -1,8 +1,8 @@
-import { fillUserComments, removeLoadingButtonClickHandler } from './big-picture-comment.js';
+import { fillUserComments, removeLoadingButtonClickHandler } from './comment/index.js';
 import {
   addBigPictureHandlers,
   removeBigPictureHandlers,
-} from './big-picture-listeners.js';
+} from './handlers.js';
 
 const START_COMMENTS_COUNT = 5;
 const NEW_COMMENTS_COUNT = 5;

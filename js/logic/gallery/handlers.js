@@ -1,4 +1,4 @@
-import { getCurrentPhotos } from './gallery.js';
+import { getCurrentPhotos } from './logic.js';
 
 const picturesContainer = document.querySelector('.pictures');
 

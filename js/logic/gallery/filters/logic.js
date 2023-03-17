@@ -2,7 +2,7 @@ import {
   removeFiltersHandler,
   addFiltersHandler,
 } from './handlers.js';
-import { getCurrentPhotos, renderPhotos } from '../gallery.js';
+import { getCurrentPhotos, renderPhotos } from '../logic.js';
 import { getRandomItems } from '../../../helpers/random.js';
 
 const filtersContainer = document.querySelector('.img-filters');

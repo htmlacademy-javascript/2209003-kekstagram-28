@@ -1,1 +1,1 @@
-export { renderGalleryPhotos, addNewPhotoInGallery } from './gallery.js';
+export { renderGalleryPhotos, addNewPhotoInGallery } from './logic.js';

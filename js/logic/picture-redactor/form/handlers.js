@@ -1,7 +1,7 @@
-import { closePictureRedactor } from '../picture-redactor.js';
+import { closePictureRedactor } from '../logic.js';
 import { validator } from './validate.js';
 import { sendPhotoData } from '../../../api/send-photo-data.js';
-import { openSuccessMessage, openErrorMessage } from '../messages/logic.js';
+import { openSuccessMessage, openErrorMessage } from '../messages/index.js';
 import { transformFormData } from './logic.js';
 
 const pictureRedactorForm = document.querySelector('.img-upload__form');
