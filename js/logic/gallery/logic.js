@@ -37,7 +37,7 @@ const addNewPhoto = ({
     url,
     likes,
     comments,
-    description,
+    description: description === '' && 'Нет заголовка',
     style,
   });
 };

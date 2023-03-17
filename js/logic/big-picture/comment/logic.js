@@ -76,6 +76,15 @@ export const fillUserComments = (
     : startCount;
   commentsAllCountContainer.textContent = commentsCount;
   commentsContainer.replaceChildren();
+
+  if (comments.length === 0) {
+    commentsInfoContainer.textContent = 'Нет комментариев';
+    loadingButton.classList.add('hidden');
+
+    return;
+  }
+
+  // for repeated call this function
   loadingButton.classList.remove('hidden');
 
   addNewComments(comments, COMMENTS_START_INDEX, startCount);
