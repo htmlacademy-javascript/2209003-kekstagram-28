@@ -6,6 +6,7 @@ const commentsAllCountContainer = commentsInfoContainer.querySelector('.comments
 const loadingButton = bigPicture.querySelector('.social__comments-loader');
 
 const COMMENTS_START_INDEX = 0;
+const DO_NOT_HAVE_COMMENT_MESSAGE = 'Нет комментариев';
 
 const userCommentTemplate = document.querySelector('#user-comment')
   .content
@@ -78,7 +79,7 @@ export const fillUserComments = (
   commentsContainer.replaceChildren();
 
   if (comments.length === 0) {
-    commentsInfoContainer.textContent = 'Нет комментариев';
+    commentsInfoContainer.textContent = DO_NOT_HAVE_COMMENT_MESSAGE;
     loadingButton.classList.add('hidden');
 
     return;
