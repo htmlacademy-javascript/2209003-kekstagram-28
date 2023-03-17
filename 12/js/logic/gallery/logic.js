@@ -11,6 +11,8 @@ const ERROR_MESSAGE_TEXT = `
   Не получилось скачать фотографии :(
   Попробуйте перезагрузить страницу или же вернитесь позже
 `;
+const DO_NOT_HAVE_DESCRIPTION_MESSAGE = 'Нет заголовка';
+
 const picturesContainer = document.querySelector('.pictures');
 const errorContainer = document.querySelector('.error-message');
 const errorMessage = errorContainer.querySelector('.error-message__text');
@@ -37,7 +39,10 @@ const addNewPhoto = ({
     url,
     likes,
     comments,
-    description: description === '' && 'Нет заголовка',
+    description:
+      description === ''
+        ? DO_NOT_HAVE_DESCRIPTION_MESSAGE
+        : description,
     style,
   });
 };
