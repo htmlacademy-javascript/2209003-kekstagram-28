@@ -1,4 +1,4 @@
-import { getCurrentPhotos } from './gallery.js';
+import { getCurrentPhotos } from './logic.js';
 
 const picturesContainer = document.querySelector('.pictures');
 
@@ -12,8 +12,8 @@ const handlePictureClick = (event, clickPicturesCallback) => {
   event.preventDefault();
 
   const photos = getCurrentPhotos();
-  const id = Number(picture.dataset.id);
-  clickPicturesCallback(photos?.find((photo) => photo.id === id));
+  const id = picture.dataset.id;
+  clickPicturesCallback(photos?.find((photo) => String(photo.id) === id));
 };
 
 let picturesContainerClickHandler = null;

@@ -1,4 +1,4 @@
-import { closeBigPicture } from './big-picture.js';
+import { closeBigPicture } from './logic.js';
 import { handleAddDocumentEscapeKeydown } from '../../helpers/handlers.js';
 
 const closingButton = document

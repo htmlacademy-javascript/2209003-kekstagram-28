@@ -6,6 +6,7 @@ const commentsAllCountContainer = commentsInfoContainer.querySelector('.comments
 const loadingButton = bigPicture.querySelector('.social__comments-loader');
 
 const COMMENTS_START_INDEX = 0;
+const DO_NOT_HAVE_COMMENT_MESSAGE = 'Нет комментариев';
 
 const userCommentTemplate = document.querySelector('#user-comment')
   .content
@@ -76,6 +77,15 @@ export const fillUserComments = (
     : startCount;
   commentsAllCountContainer.textContent = commentsCount;
   commentsContainer.replaceChildren();
+
+  if (comments.length === 0) {
+    commentsInfoContainer.textContent = DO_NOT_HAVE_COMMENT_MESSAGE;
+    loadingButton.classList.add('hidden');
+
+    return;
+  }
+
+  // for repeated call this function
   loadingButton.classList.remove('hidden');
 
   addNewComments(comments, COMMENTS_START_INDEX, startCount);

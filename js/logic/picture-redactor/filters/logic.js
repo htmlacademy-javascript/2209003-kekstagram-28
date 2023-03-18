@@ -9,31 +9,25 @@ const filterLevel = sliderParent.querySelector('.effect-level__value');
 const image = parent.querySelector('.img-upload__preview img');
 const filterItems = parent.querySelectorAll('.effects__radio');
 
-const setImageCssFilter = (filterName, filterLevelValue) => {
-  let imageFilter = '';
-
+export const getCssFilterValue = (filterName, filterLevelValue) => {
   switch (filterName) {
     case Filters.CHROME:
-      imageFilter = `grayscale(${filterLevelValue})`;
-      break;
+      return `grayscale(${filterLevelValue})`;
     case Filters.SEPIA:
-      imageFilter = `sepia(${filterLevelValue})`;
-      break;
+      return `sepia(${filterLevelValue})`;
     case Filters.MARVIN:
-      imageFilter = `invert(${filterLevelValue}%)`;
-      break;
+      return `invert(${filterLevelValue}%)`;
     case Filters.PHOBOS:
-      imageFilter = `blur(${filterLevelValue}px)`;
-      break;
+      return `blur(${filterLevelValue}px)`;
     case Filters.HEAT:
-      imageFilter = `brightness(${filterLevelValue})`;
-      break;
+      return `brightness(${filterLevelValue})`;
     default:
-      imageFilter = '';
-      break;
+      return '';
   }
+};
 
-  image.style.filter = imageFilter;
+const setImageCssFilter = (filterName, filterLevelValue) => {
+  image.style.filter = getCssFilterValue(filterName, filterLevelValue);
 };
 
 const setActiveFilterItem = (filterName) => {

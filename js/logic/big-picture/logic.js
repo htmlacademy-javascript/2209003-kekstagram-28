@@ -1,8 +1,8 @@
-import { fillUserComments, removeLoadingButtonClickHandler } from './big-picture-comment.js';
+import { fillUserComments, removeLoadingButtonClickHandler } from './comment/index.js';
 import {
   addBigPictureHandlers,
   removeBigPictureHandlers,
-} from './big-picture-listeners.js';
+} from './handlers.js';
 
 const START_COMMENTS_COUNT = 5;
 const NEW_COMMENTS_COUNT = 5;
@@ -12,8 +12,9 @@ const image = bigPicture.querySelector('.big-picture__img img');
 const descriptionContainer = bigPicture.querySelector('.social__caption');
 const likesContainer = bigPicture.querySelector('.likes-count');
 
-const fillBigPicture = ({ url, description, likes, comments }) => {
+const fillBigPicture = ({ url, description, likes, comments, style = '' }) => {
   image.src = url;
+  image.style = style;
   descriptionContainer.textContent = description;
   likesContainer.textContent = likes;
 

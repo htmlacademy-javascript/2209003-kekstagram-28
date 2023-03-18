@@ -1,4 +1,7 @@
-import { renderGalleryPhotos } from './logic/gallery/index.js';
+import {
+  renderGalleryPhotos,
+  addNewPhotoInGallery,
+} from './logic/gallery/index.js';
 import { openBigPicture } from './logic/big-picture/index.js';
 
 import { addPictureGetterHandlers } from './logic/picture-getter/index.js';
@@ -9,5 +12,7 @@ renderGalleryPhotos((photoData) => {
 });
 
 addPictureGetterHandlers((file) => {
-  openPictureRedactor(file);
+  openPictureRedactor(file, (photoSettings) => {
+    addNewPhotoInGallery(photoSettings);
+  });
 });

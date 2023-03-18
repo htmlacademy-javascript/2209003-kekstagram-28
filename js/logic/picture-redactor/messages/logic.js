@@ -62,23 +62,35 @@ const removeMessage = () => {
   currentMessage = null;
 };
 
-export const closeMessage = () => {
-  removeHandlers();
-  document.body.classList.remove('modal-open');
-
-  removeMessage();
+let callbackAfterCloseMessage = null;
+const updateCallbackAfterCloseMessage = (newCallback) => {
+  callbackAfterCloseMessage = newCallback;
+};
+const resetCallbackAfterCloseMessage = () => {
+  callbackAfterCloseMessage = null;
 };
 
-const openMessage = (messageName) => {
+const openMessage = (messageName, callbackAfterClose) => {
   const newMessage = messageToTemplate[messageName].cloneNode(true);
+
+  updateCallbackAfterCloseMessage(callbackAfterClose);
 
   addMessage(newMessage);
 };
 
-export const openSuccessMessage = () => {
-  openMessage(MessageType.SUCCESS);
+export const openSuccessMessage = (callbackAfterClose) => {
+  openMessage(MessageType.SUCCESS, callbackAfterClose);
 };
 
-export const openErrorMessage = () => {
-  openMessage(MessageType.ERROR);
+export const openErrorMessage = (callbackAfterClose) => {
+  openMessage(MessageType.ERROR, callbackAfterClose);
+};
+
+export const closeMessage = () => {
+  removeHandlers();
+  callbackAfterCloseMessage?.();
+  resetCallbackAfterCloseMessage();
+  document.body.classList.remove('modal-open');
+
+  removeMessage();
 };

@@ -1,1 +1,1 @@
-export { openBigPicture } from './big-picture.js';
+export { openBigPicture } from './logic.js';
