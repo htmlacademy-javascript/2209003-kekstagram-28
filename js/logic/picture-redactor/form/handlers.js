@@ -3,6 +3,10 @@ import { validator } from './validate.js';
 import { sendPhotoData } from '../../../api/send-photo-data.js';
 import { openSuccessMessage, openErrorMessage } from '../messages/index.js';
 import { transformFormData } from './logic.js';
+import {
+  removeModalKeydownHandler,
+  addModalKeydownHandler,
+} from '../modal/index.js';
 
 const pictureRedactorForm = document.querySelector('.img-upload__form');
 const submittingButton = pictureRedactorForm.querySelector('.img-upload__submit');
@@ -30,7 +34,9 @@ const pictureRedactorFormSubmitHandler = (event) => {
         openSuccessMessage();
       })
       .catch(() => {
-        openErrorMessage();
+        removeModalKeydownHandler();
+
+        openErrorMessage(addModalKeydownHandler);
       })
       .finally(() => {
         submittingButton.disabled = false;

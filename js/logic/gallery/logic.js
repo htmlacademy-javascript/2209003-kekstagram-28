@@ -17,7 +17,7 @@ const picturesContainer = document.querySelector('.pictures');
 const errorContainer = document.querySelector('.error-message');
 const errorMessage = errorContainer.querySelector('.error-message__text');
 
-let currentPhotos = null;
+let currentPhotos = [];
 const updateCurrentPhotos = (newPhotos) => {
   currentPhotos = newPhotos;
 };
@@ -30,11 +30,7 @@ const addNewPhoto = ({
   description = '',
   style = '',
 }) => {
-  if (currentPhotos === null) {
-    currentPhotos = [];
-  }
-
-  currentPhotos.push({
+  const newPhoto = {
     id,
     url,
     likes,
@@ -44,7 +40,11 @@ const addNewPhoto = ({
         ? DO_NOT_HAVE_DESCRIPTION_MESSAGE
         : description,
     style,
-  });
+  };
+
+  currentPhotos.push(newPhoto);
+
+  return newPhoto;
 };
 
 const getNewPhotosFromServer = async () => {
@@ -75,15 +75,14 @@ const getNewPhotoId = getIdGenerator('/new-photos');
 export const addNewPhotoInGallery = (photoSettings) => {
   const newPhotoId = getNewPhotoId();
 
-  addNewPhoto({ id: newPhotoId, ...photoSettings });
-  picturesContainer.appendChild(
-    createPicture(getCurrentPhotos().find((photos) => photos.id === newPhotoId))
-  );
+  const newPhoto = addNewPhoto({ id: newPhotoId, ...photoSettings });
+  picturesContainer.appendChild(createPicture(newPhoto));
 };
 
 export const renderGalleryPhotos = async (clickPicturesCallback) => {
   const newPhotos = await getNewPhotosFromServer();
 
+  // if we got a error in getNewPhotosFromServer
   if (newPhotos.length === 0) {
     return;
   }
