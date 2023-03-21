@@ -3,13 +3,13 @@ const getRandomNumber = (min, max) => (
 );
 
 export const getRandomItems = (items, count) => {
-  const result = [];
+  const resultedRandomItems = [];
   const repeatedIndexes = [];
 
   const itemsLength = items.length;
   count = (count > itemsLength) ? itemsLength : count;
 
-  while (result.length < count) {
+  while (resultedRandomItems.length < count) {
     const randomIndex = getRandomNumber(0, itemsLength - 1);
 
     if (repeatedIndexes.includes(randomIndex)) {
@@ -17,8 +17,8 @@ export const getRandomItems = (items, count) => {
     }
 
     repeatedIndexes.push(randomIndex);
-    result.push(items[randomIndex]);
+    resultedRandomItems.push(items[randomIndex]);
   }
 
-  return result;
+  return resultedRandomItems;
 };
